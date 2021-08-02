@@ -1,0 +1,26 @@
+<annotation>
+	<folder>0817</folder>
+	<filename>036fba7c96374635853511ead2c1c728.jpg</filename>
+	<path>C:\Users\pui_s\Downloads\nabirds.tar\nabirds\images\0817\036fba7c96374635853511ead2c1c728.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1024</width>
+		<height>725</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>bird</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>34</xmin>
+			<ymin>152</ymin>
+			<xmax>743</xmax>
+			<ymax>641</ymax>
+		</bndbox>
+	</object>
+</annotation>
