@@ -15,5 +15,6 @@ Source: https://github.com/tensorflow/models/blob/master/research/object_detecti
 [NABirds](https://dl.allaboutbirds.org/nabirds) data set provided by the [Cornell Lab of Ornithology](https://www.birds.cornell.edu/home)
 
 ## Future Work:
-1. Include samples without bird for training the model to recognize the cases bird are not present.
-2. Use the detected area to predict most likely next movement of the bird, i.e. is the bird flying toward drone or flying away from drone.
+1. Include samples WITHOUT bird for training the model to recognize the cases bird are not present.
+2. Have samples of bird flapping wings which are better samples for the sitation where drone will encounter birds in operation.
+3. Use the detected area to predict most likely next movement of the bird, i.e. is the bird flying toward drone or flying away from drone.
