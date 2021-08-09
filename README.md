@@ -9,6 +9,7 @@ Light weights pre-trained object detection models are considered. The initlial s
 1. SSD MobileNet v2 320x320
 2. CenterNet MobileNetV2 FPN 512x512
 3. EfficientDet D0 512x512
+
 Source: https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md
 
 ## Training Data:
