@@ -1,6 +1,10 @@
 # BirdBox_helping_drone_detect_bird
 Detect bird given image 
 
+## Setup
+refer to my [bird_box_app repository](https://github.com/khanin-th/bird_box_app) for setting up environment to run TensorFlow API
+
+
 ## Metrics
 1. __False Negative__ is important, because being blind to bird when it is present can harm the drone. The process will aim to reduce __False Negative__, and this essentially leads to high __Recall__, which can be used to compare models (higher __Recall__ is better)
 1. Processing time and computational capability requirement are also important, since the model is aimed to be used in detect-and-avoid system for drone. 

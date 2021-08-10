@@ -1,0 +1,15 @@
+TensorflowObjectDetection
+├── app (stuffs for deployment)
+|   ├── another tutorial
+├── Tensorflow (stuffs for running tensorflow API)
+│   ├── labelimg
+│   ├── models
+│   ├── protoc
+│   ├── scripts (to keep any useful scripts)
+│   └── workspace
+│       ├── TF_files (to keep tf record and label mapping files)
+│       ├── samples (to keep samples, here we store images)
+│       ├── models (to store our trained model)
+│       └── pre-trained-models (to store base architecture which is used for retraining)
+├── virtual_environment_name
+└── other jupyter notebooks or files
