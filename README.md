@@ -83,17 +83,19 @@ Light weights pre-trained object detection models are considered. The initlial s
 2. CenterNet MobileNetV2 FPN 512x512
 3. EfficientDet D0 512x512
 
-(table for objective function value for these models)
+
 
    <center>
    
    | Model  | Objective Function Value |
    | ------------- | ------------- |
    | SSD MobileNet v2 320x320  | $\frac{0.633}{139.650361/35}=0.159$  |
-   | CenterNet MobileNetV2 FPN 512x512  | $\frac{0.792}{70.526061/35}=0.393$  |
-   | EfficientDet D0 512x512  |  $\frac{0.630}{}=0.393$ |
+   | CenterNet MobileNetV2 FPN 512x512  | $\frac{0.697}{70.526061/35}=0.346$  |
+   | EfficientDet D0 512x512  |  $\frac{0.630}{235.922/35}=0.093$ |
    
    </center>
+
+    See [Training_and_Detection_multiple_images.ipynb](assets\Training_and_Detection_multiple_images.ipynb) for denominator number (total run time is calculated and the `Processing_time_per_image` is simply `total_time/#images`)
 
 ## Fine tuning the selected architecture
 Based on the objective function above, the clear winner is `CenterNet MobileNetV2 FPN 512x512`, which will be used to further fine tune.
@@ -103,11 +105,13 @@ Based on the objective function above, the clear winner is `CenterNet MobileNetV
    
    | optimizer  | Recall |
    | ------------- | ------------- |
-   | Adam  |   |
-   | Momentum  |   |
-   | RMSProp  |   |
+   | Adam  |  $0.792$ |
+   | Momentum  | $0.751$  |
+   | RMSProp  | Failed to converge with default setting  |
    
    </center>
+
+   All perform relatively the same (RMSProp still needs to be verified), so any optimizer can be used, here I use `Adam` for the next explorations.
 
 ### Try different `learning rate`
 
@@ -115,18 +119,45 @@ Based on the objective function above, the clear winner is `CenterNet MobileNetV
    
    | Learning Rate  | Recall |
    | ------------- | ------------- |
-   | base ()  |   |
-   | 0.0003  |   |
-   | 0.0001  |   |
-   | 0.0008  |   |
-   
+   | 0.005 (base)  | $0.697$  |
+   | 0.0002  | $0.792$  |
+   | 0.0003  | $0.822$  |
+   | 0.0001  | $0.803$ |
+   | 0.0008  |  $0.807$ |
+
    </center>
+
+   All perform relatively well, but the best model seems to be achieved at learning rate of $0.003$. Note that this learning rate is the `learning_rate_base` value in config file as shown below
+
+   ![learning rate](images\lr_config.png)
+   
+   
 
 ### Try different `learning rate decay method`
 
+   <center>
+   
+   | learning rate decay method  | Recall |
+   | ------------- | ------------- |
+   | cosine_decay_learning_rate (base)  | $0.792$  |
+   | exponential_decay_learning_rate  | $0.811$  |
+
+   </center>
+
+Exponential decay scheduler seems to perform better than consine decay.
+
 ## Current Best Model
 It's performance: [centernet_2.pdf](assets\centernet_2.pdf)
+
 ## Future Work:
 1. Include samples WITHOUT bird for training the model to recognize the cases bird are not present.
 2. Have only samples of bird flapping wings which are better representation for those birds drone will encounter in operation.
 3. Use the detected area to predict most likely next movement of the bird, i.e. is the bird flying toward drone or flying away from drone.
+
+
+## Reference:
+1. "State of Deep Learning for Object Detection - You Should Consider CenterNets!," victordibia.com, 21 March 2021. [Online]. Available: https://victordibia.com/blog/state-of-object-detection/. [Accessed 2 August 2021].
+1. D. Morton, "Bird Box," towardsdatascience.com, 2 September 2020. [Online]. Available: https://towardsdatascience.com/bird-box-1d31bad4c9c7. [Accessed 30 July 2021].
+1. N. Renotte, "Tensorflow Object Detection in 5 Hours with Python | Full Course with 3 Projects," youtube.com, 9 April 2021. [Online]. Available: https://www.youtube.com/watch?v=yqkISICHH-U. [Accessed 30 July 2021].
+1. "Error “indices[0] = 0 not in [0,0)” when training CenterNet MobileNetV2 FPN 512x512 with tensorflow object detection api," stackoverflow.com, 3 March 2021. [Online]. Available: https://stackoverflow.com/questions/66457432/error-indices0-0-not-in-0-0-when-training-centernet-mobilenetv2-fpn-512x. [Accessed 6 August 2021].
+1. A. A. Morgunov, "TensorFlow Object Detection API: Best Practices to Training, Evaluation & Deployment," neptune.ai, 16 July 2021. [Online]. Available: https://neptune.ai/blog/tensorflow-object-detection-api-best-practices-to-training-evaluation-deployment. [Accessed 6 August 2021].
