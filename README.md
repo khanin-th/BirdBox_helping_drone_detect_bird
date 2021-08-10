@@ -91,7 +91,7 @@ Light weights pre-trained object detection models are considered. The initlial s
    | ------------- | ------------- |
    | SSD MobileNet v2 320x320  | $\frac{0.633}{139.650361/35}=0.159$  |
    | CenterNet MobileNetV2 FPN 512x512  | $\frac{0.792}{70.526061/35}=0.393$  |
-   | EfficientDet D0 512x512  | 1  |
+   | EfficientDet D0 512x512  |  $\frac{0.630}{}=0.393$ |
    
    </center>
 
@@ -124,7 +124,8 @@ Based on the objective function above, the clear winner is `CenterNet MobileNetV
 
 ### Try different `learning rate decay method`
 
-
+## Current Best Model
+It's performance: [centernet_2.pdf](assets\centernet_2.pdf)
 ## Future Work:
 1. Include samples WITHOUT bird for training the model to recognize the cases bird are not present.
 2. Have only samples of bird flapping wings which are better representation for those birds drone will encounter in operation.
