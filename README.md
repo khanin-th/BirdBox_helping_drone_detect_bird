@@ -89,7 +89,7 @@ Light weights pre-trained object detection models are considered. The initlial s
    
    | Model  | Objective Function Value |
    | ------------- | ------------- |
-   | SSD MobileNet v2 320x320  | $\frac{0.633}{139.650361/35}=0.159$  |
+   | SSD MobileNet v2 320x320  | $`\frac{0.633}{139.650361/35}=0.159`$  |
    | CenterNet MobileNetV2 FPN 512x512  | $\frac{0.792}{70.526061/35}=0.393$  |
    | EfficientDet D0 512x512  |  $\frac{0.630}{}=0.393$ |
    
