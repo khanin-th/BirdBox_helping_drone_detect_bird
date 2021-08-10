@@ -7,7 +7,44 @@ Detect bird given image
 1. Download pre-trained model from [TensorFlow 2 Detection Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md) and extract the model inside `Tensorflow/workspace/pre_trained_models` as shown
 ![pre train model folder](images\pre_train_folder.png)
 1. Create `label_map.pbtxt`, `train.record` and `test.record` as per instructions in [generate_record_file.ipynb](generate_record_file.ipynb)
-1. 
+1. Create a new folder to store files which will be created at re-training steps. Copy model config file, i.e. `Tensorflow/workspace/pre_trained_models/centernet_mobilenetv2_fpn_od/pipeline.config` to the newly created folder, i.e. `Tensorflow/workspace/models/my_centernet_v1`
+1. You will need to manually alter certain information in the newly copied config file. The required fields to be able to re-train the `CenterNet MobileNetV2 FPN 512x512` is as follwoing
+
+    <center>
+    
+    | Parameter  | Value |
+    | ------------- | ------------- |
+    | model.center_net.num_classes  | 1  |
+    | train_config.batch_size  | 4  |
+    | train_config.fine_tune_checkpoint  | `Tensorflow\\workspace\\pre_trained_models\\centernet_mobilenetv2_fpn_od\\checkpoint\\ckpt-301`  |
+    | train_config.fine_tune_checkpoint_version  | 2  |
+    | train_input_reader.label_map_path  | `Tensorflow\\workspace\\TF_files\\label_map.pbtxt`  |
+    | train_input_reader.tf_record_input_reader.input_path  | `Tensorflow\\workspace\\TF_files\\train.record`  |
+    | eval_input_reader.label_map_path  | `Tensorflow\\workspace\\TF_files\\label_map.pbtxt`  |
+    | eval_input_reader.tf_record_input_reader.input_path  | `Tensorflow\\workspace\\TF_files\\test.record` |
+
+    </center>
+
+1. Run the following script in command prompt to start training process 
+
+    ```
+    python Tensorflow\models\research\object_detection\model_main_tf2.py --model_dir=Tensorflow\workspace\models\my_centernet_v1 --pipeline_config_path=Tensorflow\workspace\models\my_centernet_v1\pipeline.config --num_train_steps=50000
+    ```
+    Note that `num_train_steps` can be any nunber as you wish
+
+1. (Optional) you can run `tensorboard` to visualize progress by running the following command in a separate command prompt
+
+    ```
+    cd Tensorflow/workspace/models/my_centernet_v1 && tensorboard --logdir="./train" --host localhost --port 8088
+    ```
+
+1. Evaluate the model by running the following command in command prompt
+
+    ```
+    python Tensorflow\models\research\object_detection\model_main_tf2.py --model_dir=Tensorflow\workspace\models\my_centernet_v1 --pipeline_config_path=Tensorflow\workspace\models\my_centernet_v1\pipeline.config --checkpoint_dir=Tensorflow\workspace\models\my_centernet_v1
+    ```
+
+    The value of interest is ``
 
 
 

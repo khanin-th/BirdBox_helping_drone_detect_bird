@@ -9,7 +9,9 @@ TensorflowObjectDetection
 │   └── workspace
 │       ├── TF_files (to keep tf record and label mapping files)
 │       ├── samples (to keep samples, here we store images)
+│           ├── train
+│           ├── test
 │       ├── models (to store our trained model)
-│       └── pre-trained-models (to store base architecture which is used for retraining)
+│       └── pre_trained_models (to store base architecture which is used for retraining)
 ├── virtual_environment_name
 └── other jupyter notebooks or files
